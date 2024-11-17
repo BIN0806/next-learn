@@ -7,6 +7,33 @@ import _ from 'lodash';
 import styles from '../styles/Home.module.css';
 import CodeSampleModal from '../components/CodeSampleModal';
 
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
+
+export default function Home() {
+  const pathname = usePathname();
+
+  const isDarkMode = pathname === '/dark-mode';
+
+  return (
+    <div className={clsx('container', { 'dark-mode': isDarkMode, 'light-mode': !isDarkMode })}>
+      <h1>Welcome to the Dark/Light Mode Page!</h1>
+      <p>The current page is: {pathname}</p>
+
+      <div>
+        <Link href="/dark-mode">
+          <button>Dark Mode</button>
+        </Link>
+        <Link href="/light-mode">
+          <button>Light Mode</button>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+
 export default function Start({ countries }) {
   const [results, setResults] = useState(countries);
   const [isModalOpen, setIsModalOpen] = useState(false);
